@@ -12,7 +12,7 @@ params:
   pid_report: 0
 ---
 
-```{r}
+```{r, echo=FALSE, include = FALSE}
 if (!require('cowplot')) install.packages('cowplot'); library('cowplot')
 if (!require('dplyr')) install.packages('dplyr'); library('dplyr')
 if (!require('esquisse')) install.packages('esquisse'); library('esquisse') 
@@ -73,11 +73,17 @@ targets::tar_load(DF_analysis)
 
 ```
 
+## Hipotesis 
+
+**Un mayor nivel en la dimensión ideológica de la religiosidad se asocia con un mayor nivel de disgusto moral ante dilemas morales difíciles de justificar racionalmente (moral dumbfounding).**
+
+
 ## Data preparation
 
-Descripción del proceso de preparación de datos.
+Se seleccionaron las variables relevantes para el análisis, centradas en la dimensión ideológica de la religiosidad y el nivel de disgusto moral en situaciones de moral dumbfounding. A partir del conjunto de datos original, se filtraron únicamente aquellas columnas que contenían puntuaciones directas (DIRd y DIRt) asociadas a las variables de interés. Luego, se generó una nueva base (df) sobre la cual se realizaron los análisis descriptivos, la visualización de distribuciones y la regresión lineal. Esta preparación permitió asegurar la consistencia de las variables y facilitar la interpretación de los resultados.
 
-```{r data-preparation}
+
+```{r data-preparation, include=FALSE}
 
 DF =
  DF_analysis$DF_analysis %>% 
@@ -96,7 +102,7 @@ df= DF
 
 Tabla 1. Descripción de la tabla 1. Tabla 2. ...
 
-```{r descriptive-table}
+```{r descriptive-table,  echo=FALSE}
 
 # You can add a variable to the `by` argument and uncomment
 # names(DF) shows the variables you hava available
@@ -115,7 +121,7 @@ table1
 
 Figura 1. Descripción de la Figura 1. Figura 2. ...
 
-```{r plots}
+```{r plots, echo = FALSE}
 
 # Remember to change the variables in your plot
 
@@ -172,7 +178,7 @@ cowplot::plot_grid(
 
 ## Analysis
 
-```{r analysis}
+```{r analysis, echo = FALSE}
 
 # Remember to change the variables used in your model and inline_text 
 
@@ -188,13 +194,19 @@ table_1 <- gtsummary::tbl_regression(fit, intercept = TRUE) %>%
 table_1
 
 # report::report(model1)
+paste0(
+  "CRS_Ideological was not a significant predictor of moral disgust dumbfounding, ",
+  gtsummary::inline_text(table_1, variable = CRS_Ideologica_DIRd, pattern = "β = {estimate}, p = {p.value}")
+)
 
-paste0("CRS_Ideological was not a significant predictor of EAR", 
-       ", beta = ", 
-       gtsummary::inline_text(table_1, variable = CRS_Ideologica_DIRd))
 
 ```
 
-```{r}
+```{r, echo = FALSE}
 resid_panel(fit)
 ```
+
+
+## Conclusión 
+La hipótesis planteaba que un mayor nivel en la dimensión ideológica de la religiosidad estaría asociado con un mayor nivel de disgusto moral en situaciones de moral dumbfounding. Sin embargo, los resultados no respaldaron esta predicción.  Esto sugiere que la sola adhesión a creencias religiosas no necesariamente se traduce en una mayor sensibilidad emocional de tipo moral. Es posible que otras dimensiones más experienciales o prácticas de la religiosidad influyan más directamente en este tipo de juicios morales viscerales. En consecuencia,se señala la necesidad de replantear qué aspectos específicos de la religiosidad impactan en la emocionalidad moral y bajo qué condiciones.
+
