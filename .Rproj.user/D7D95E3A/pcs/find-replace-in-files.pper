@@ -1,0 +1,17 @@
+{
+    "dialog-state": {
+        "query": "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",
+        "path": "",
+        "regex": false,
+        "caseSensitive": false,
+        "wholeWord": false,
+        "filePatterns": [],
+        "useGitGrep": true,
+        "excludeGitIgnore": true,
+        "excludeFilePatterns": [],
+        "resultsCount": 0,
+        "errorCount": 0,
+        "replaceErrors": "",
+        "projectRelative": true
+    }
+}
